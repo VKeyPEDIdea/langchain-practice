@@ -30,11 +30,11 @@ const logError = err => {
     splitDocs,
     embeddings
   );
-  const relevantDocs = await vectorStore.similaritySearch(question);
   
+  const relevantDocs = await vectorStore.similaritySearch(question);
   const date = Date.now();
   mkdir('./answers', logError);
+  mkdir('./vectorStore', logError);
+  writeFile(`./vectorStore/${date}_vector.json`, JSON.stringify(vectorStore.memoryVectors), logError);
   writeFile(`./answers/${date}.json`, JSON.stringify(relevantDocs), logError);
-
-  console.log(relevantDocs);
 })();
